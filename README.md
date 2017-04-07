@@ -2,6 +2,6 @@
 
 Integrantes: 
 
-Juan Escalona
-Alfredo Silva
+Juan Escalona \n
+Alfredo Silva \n
 Francisco Pérez
