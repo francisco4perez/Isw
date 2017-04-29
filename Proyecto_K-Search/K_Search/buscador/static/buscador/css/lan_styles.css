@@ -1,0 +1,274 @@
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+@font-face {
+  font-family: 'apexnew-bold';
+  src: url("../fonts/apexnew-bold-webfont.eot");
+  src: url("../fonts/apexnew-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/apexnew-v2-bold.woff") format("woff"), url("../fonts/apexnew-v2-bold.svg") format("svg"), url("../fonts/apexnew-v2-bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'apexnew-book';
+  src: url("../fonts/apexnew-book-webfont.eot");
+  src: url("../fonts/apexnew-book-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/apexnew-v2-book.woff") format("woff"), url("../fonts/apexnew-v2-book.svg") format("svg"), url("../fonts/apexnew-v2-book.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'apexnew-light';
+  src: url("../fonts/apexnew-light-webfont.eot");
+  src: url("../fonts/apexnew-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/apexnew-v2-light.woff") format("woff"), url("../fonts/apexnew-v2-light.svg") format("svg"), url("../fonts/apexnew-v2-light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.login-page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url(../images/bg-login.jpg) center bottom no-repeat;
+  background-size: cover;
+}
+.login-page .box-logo, .login-page .box-login {
+  position: absolute;
+  left: 50%;
+  /*-webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);*/
+  margin-left: -156px;
+}
+.login-page .box-logo {
+  width: 80%;
+  height: auto;
+  position: absolute;
+  top: 100px;
+  max-width: 315px;
+}
+.login-page .box-logo .logo {
+  width: 315px;
+  height: auto;
+}
+.login-page .box-login {
+  top: 220px;
+}
+@media screen and (max-width: 340px) {
+  .login-page .box-logo {
+    width: 150px;
+    top: inherit;
+    left: inherit;
+    bottom: 100px;
+    right: 30px;
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+  .login-page .box-login {
+    top: 0;
+    max-width: 100%;
+  }
+
+  .login-page .box-logo .logo{
+    width: 150px;
+  }
+}
+
+.page-lang-external .seletor-duvidas .select-estilizado {
+  display: inline-block;
+  min-width: 210px;
+  margin-top: 20px;
+  width: 100%;
+}
+.page-lang-external .seletor-duvidas .titulo {
+  width: 100%;
+}
+.page-lang-external .seletor-duvidas {
+  width: 250px;
+  height: auto;
+  text-align: center;
+  margin-left: 10%;
+  cursor: pointer;
+}
+.page-lang-external #combo-default {
+  -moz-appearance: none;
+  background: #dcd6cd url(../images/ico-select.png) no-repeat;
+  background-position: 95% 50%;
+  padding-right: 30px;
+  outline: none;
+  width: 100%;
+  color: #828282;
+  font-size: 13px;
+  font-family: apexnew-book;
+  border: 1px solid #828282;
+  padding: 5px;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.box-login {
+  width: 315px;
+  height: auto;
+  max-width: 315px;
+  background-color: #dcd6cd;
+  padding: 30px 0 30px 0;
+  font-family: apexnew-book;
+  font-size: 14px;
+  font-size: 0.875em;
+}
+.box-login .title-form {
+  margin-left: 5%;
+}
+.box-login .form {
+  position: relative;
+  width: 90%;
+  height: auto;
+  min-height: 155px;
+  margin-left: 5%;
+}
+.box-login .form .icon {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  margin: 19px 0 0 14px;
+  background: url(../img/sprite-form.png);
+  background-position: -35px 0;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+.box-login .form .submit {
+  width: 64px;
+  height: 24px;
+  background-color: #290088;
+  border: none;
+  color: #fff;
+  margin-top: 12px;
+  display: inline;
+  float: right;
+  cursor: pointer;
+}
+.box_erro_login{width: 215px; margin: 40px 0 0px 0; line-height: 18px}
+.texto_top_login{ display: block; text-align: center;margin: 5px 0 30px 0; color: #290581;}
+.link_login_site_externo{ display:inline-block; position: absolute; margin: 50px 0 0 0; text-decoration: underline; color: #ffffff; text-align: center; width: 100%}
+
+
+
+
+
+.footer {
+  width: 100%;
+  height: 30px;
+  background-color: #dcd6cd;
+  font-family: apexnew-book;
+  position: absolute;
+  bottom: 0;
+}
+.footer .links {
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  font-size: 12px;
+  font-size: 0.75em;
+  line-height: 1.9rem;
+  color: #333333;
+  margin: 0 auto 0 auto;
+}
+
+.footer .links .left {
+  width: 45%;
+  height: 100%;
+  display: inline;
+  float: left;
+  text-align: left;
+  margin-left: 10px;
+}
+.footer .links .left .txt {
+  font-family: apexnew-book;
+  margin-right: 5px;
+}
+.footer .links .left .alink {
+  font-family: apexnew-bold;
+  color: #333333;
+  margin-right: 5px;
+}
+.footer .links .right {
+  width: 45%;
+  height: 100%;
+  display: inline;
+  float: right;
+  min-width: 320px;
+  text-align: right;
+  margin-right: 10px;
+}
+@media screen and (max-width: 639px) {
+  .footer {
+    height: 60px;
+  }
+  .footer .links .left {
+    width: 110px;
+  }
+  .footer .links .left .alink {
+    margin-right: 0px;
+  }
+  .footer .links .right {
+    width: 130px;
+    min-width: 160px;
+  }
+}
