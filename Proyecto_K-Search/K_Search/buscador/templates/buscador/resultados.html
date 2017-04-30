@@ -7,17 +7,41 @@
     
     <div class="no-list row center-xs middle-xs">
 
-        <div style="height:1000px">
+        <div style="min-height:1000px">
+            {% csrf_token %}
+            <div class="main_div">
 
-            {% for url in lista_urls %}
-                <div>
-                    <a href="{{ url }}">{{ url }}</a>
-                </div>
-                
-            {% endfor %}
-          
+                <h1>Resultados de la busqueda</h1>
+
+                <ul class="w3-ul w3-card-4">
+
+                    {% if lista_urls %}
+
+                        {% for url in lista_urls %}
+
+                            <a href="{{ url }}" target="_blank">
+
+                              <li class="w3-padding-16 resultado">
+
+                                <img class="w3-left w3-circle w3-margin-right" src="../../static/buscador/Images/mapas-y-banderas.png" style="width:50px; margin-bottom:5px">
+                                <div style="margin-bottom:15px"><p>{{ url }}</p></div>
+                                
+                              </li>
+                            </a>
+
+                        {% endfor %}
 
 
+                    {% else %}
+
+                        <h2>No se han encontrado resultados</h2>
+                        
+                    {% endif %}
+
+                </ul>
+
+
+            </div>
 
         </div>
 
