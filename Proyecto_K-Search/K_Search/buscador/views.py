@@ -21,8 +21,9 @@ def main_view(request):
 	if request.method == "POST":
 		# Ejemplos sacando valores del formulario (de cada input)
 		busqueda = request.POST.get("search")
-		lista_urls = search(busqueda, stop=10)
-		context = {'lista' : lista_urls}
+		for elem in search(str(busqueda), stop=20):
+			lista_urls.append(elem)
+		context = {'lista_urls' : lista_urls}
 		return render(request, 'buscador/resultados.html',context)
     		
 
@@ -30,6 +31,7 @@ def main_view(request):
 
 	return render(request, 'buscador/index.html',context)
 def resultados_view(request):
+	request['lista']
 	context={}
 	return render(request, 'buscador/resultados.html',context)
 

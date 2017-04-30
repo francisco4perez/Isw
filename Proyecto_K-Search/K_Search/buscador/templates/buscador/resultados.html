@@ -1,0 +1,28 @@
+{% extends 'buscador/header.html' %}
+
+    {% block content %}
+
+<body>
+
+    
+    <div class="no-list row center-xs middle-xs">
+
+        <div style="height:1000px">
+
+            {% for url in lista_urls %}
+                <div>
+                    <a href="{{ url }}">{{ url }}</a>
+                </div>
+                
+            {% endfor %}
+          
+
+
+
+        </div>
+
+    </div>
+
+</body>
+
+{% endblock %}

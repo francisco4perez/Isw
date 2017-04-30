@@ -11,7 +11,7 @@
                 <div class="button_box2">
             <form class="form-wrapper-2 cf" id= "main-content"  action="/resultados/" method="post">
             {% csrf_token %}
-            <input type="text" placeholder="Search here..." required>
+            <input id='search' name ='search' type="text" placeholder="Search here..." required>
             <button type="submit">Search</button>
             </form>
             </div>
