@@ -4,17 +4,43 @@
 
 <body>
 
+
+
+
+
     
     <div class="no-list row center-xs middle-xs">
 
-        <div style="height:1000px">
-                <div class="button_box2">
-            <form class="form-wrapper-2 cf" id= "main-content"  action="/resultados/" method="post">
-            {% csrf_token %}
-            <input id='search' name ='search' type="text" placeholder="Search here..." required>
-            <button type="submit">Search</button>
-            </form>
+        <div style="height:1100px">
+
+            <div class="main_div">
+
+                <div>
+                <p class="main_title">Bienvenido al futuro en busquedas</p>
+                <p class="sub_title">Motor de busqueda de contenidos web</p>
+                </div>
+
+
+                <div class="button_box2 row center-xs middle-xs">
+                    <form class="form-wrapper-2 cf" id= "main-content"  action="/resultados/" method="post">
+                    {% csrf_token %}
+                    <input id='search' name ='search' type="text" placeholder="Search here..." required>
+                    <button type="submit">Search</button>
+                    </form>
+
+                </div>
+
+                <div>
+                        
+                    <img class="main_images" src="../../static/buscador/Images/mapas-y-banderas.png">
+                    <img class="main_images" src="../../static/buscador/Images/mapas-y-banderas.png">
+                    <img class="main_images" src="../../static/buscador/Images/mapas-y-banderas.png">
+
+                </div>
+
             </div>
+
+            
         </div>
 
     </div>
@@ -22,3 +48,4 @@
 </body>
 
 {% endblock %}
+

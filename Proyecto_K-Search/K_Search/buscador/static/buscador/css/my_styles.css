@@ -3,6 +3,9 @@ html,body{
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 	background-color: #BCFF62;
+
+	max-width: 100%;
+    overflow-x: hidden;
 }
 
 a,a:visited{
@@ -25,10 +28,37 @@ a,a:visited{
 	padding: 10px 120px;
 }
 
+.header{
+	-webkit-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+}
+
+
 .footer{
 	margin: 0px;
-	margin-bottom: 20px;
 	margin-top: auto;
+
+	-webkit-box-shadow: 0px -2px 19px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px -2px 19px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px -2px 19px 0px rgba(0,0,0,0.75);
+}
+
+.main_div{
+	margin-top: 100px;
+}
+
+.main_title{
+	font-size: 70px;
+}
+
+.sub_title{
+	font-size: 25px;
+	color: grey;
+}
+
+.main_images{
+	height: 300px;
 }
 
 .no-margin{
@@ -86,7 +116,7 @@ a,a:visited{
 /* search box */
 
 .button_box2 {
-margin:100px auto;
+margin:180px auto;
 }
 /*-------------------------------------*/
 .cf:before, .cf:after{
@@ -114,11 +144,11 @@ box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
 }
 
 .form-wrapper-2 input {
-width: 410px;
+width: 710px;
 height: 50px;
 padding: 10px 5px;
 float: left;
-font: bold 15px 'Raleway', sans-serif;
+font: bold 25px 'Raleway', sans-serif;
 border: 0;
 background: #eee;
 -moz-border-radius: 3px 0 0 3px;
@@ -156,7 +186,7 @@ float: right;
 border: 0;
 padding: 0;
 cursor: pointer;
-height: 40px;
+height: 50px;
 width: 110px;
 font: bold 15px/40px 'Raleway', sans-serif;
 color: #fff;
