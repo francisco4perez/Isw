@@ -5,11 +5,12 @@
 <body>
 
     
-    <div class="no-list row center-xs middle-xs" id= "main-content"  action="/results/" method="post">
+    <div class="no-list row center-xs middle-xs">
 
         <div style="height:1000px">
                 <div class="button_box2">
-            <form class="form-wrapper-2 cf">
+            <form class="form-wrapper-2 cf" id= "main-content"  action="/resultados/" method="post">
+            {% csrf_token %}
             <input type="text" placeholder="Search here..." required>
             <button type="submit">Search</button>
             </form>
@@ -21,4 +22,3 @@
 </body>
 
 {% endblock %}
-

@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from buscador.views import main_view
+from buscador.views import *
+
 
 urlpatterns = [
 	url(r'^', main_view, name='main_view'),
     url(r'^admin/', admin.site.urls),
+    url(r'^resultados/', resultados_view, name='resultados_view'),
 ]

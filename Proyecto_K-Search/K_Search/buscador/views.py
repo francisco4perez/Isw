@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from aplicacion.models import *
+from buscador.models import *
 from django.contrib.auth.models import User #// Sistema de usuarios proporcionado por Django
 from django.shortcuts import get_object_or_404, render, redirect #// Tribial de django
 from django.http import HttpResponseRedirect, HttpResponse #// En caso de no querer hacer render
@@ -15,15 +15,23 @@ from google import search,get_page
 
 
 def main_view(request):
+
+	lista_urls=[]
+
 	if request.method == "POST":
 		# Ejemplos sacando valores del formulario (de cada input)
 		busqueda = request.POST.get("search")
 		lista_urls = search(busqueda, stop=10)
+		context = {'lista' : lista_urls}
+		return render(request, 'buscador/resultados.html',context)
     		
 
-	context = {'var1' : var1}
+	context = {'lista' : lista_urls}
 
 	return render(request, 'buscador/index.html',context)
+def resultados_view(request):
+	context={}
+	return render(request, 'buscador/resultados.html',context)
 
 '''@login_required(login_url="/")
 def add_to_calendar(request, sel_g=None):
