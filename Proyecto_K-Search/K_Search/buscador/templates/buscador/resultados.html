@@ -4,13 +4,11 @@
 
 <body>
 
-    
     <div class="no-list row center-xs middle-xs">
-
         <div style="min-height:1000px">
             {% csrf_token %}
             <div class="main_div">
-
+            
                 <h1>Resultados de la busqueda</h1>
 
                 <ul class="w3-ul w3-card-4">
@@ -23,14 +21,13 @@
 
                               <li class="w3-padding-16 resultado">
 
-                                <img class="w3-left w3-circle w3-margin-right" src="../../static/buscador/Images/mapas-y-banderas.png" style="width:50px; margin-bottom:5px">
-                                <div style="margin-bottom:15px"><p>{{ url }}</p></div>
+                                <img class="w3-left w3-circle w3-margin-right" src="../../static/buscador/Images/mapas-y-banderas.png" style="width:50px; margin-bottom:4px">
+                                <p>{{ url }}</p>
                                 
                               </li>
                             </a>
 
                         {% endfor %}
-
 
                     {% else %}
 
@@ -39,14 +36,9 @@
                     {% endif %}
 
                 </ul>
-
-
             </div>
-
         </div>
-
     </div>
-
 </body>
 
 {% endblock %}

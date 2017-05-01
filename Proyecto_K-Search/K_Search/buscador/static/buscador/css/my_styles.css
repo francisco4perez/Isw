@@ -62,6 +62,11 @@ a,a:visited{
 	height: 300px;
 }
 
+.mini_image{
+	width:50px;
+	margin-bottom:5px;
+}
+
 
 .w3-ul{list-style-type:none;padding:0;margin:0}.w3-ul li{padding:8px 16px;border-bottom:1px solid #ddd}.w3-ul li:last-child{border-bottom:none}
 .w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
@@ -74,6 +79,10 @@ a,a:visited{
 	height:45px;
 	width: 1000px;
 	background-color: #94C08E;
+}
+
+.resultado:hover {
+	background: #6BA262;
 }
 
 .resultado p{
@@ -136,7 +145,7 @@ a,a:visited{
 
 
 
-/* search box */
+/* SEARCH BOX ------------------------------------------ */
 
 .button_box2 {
 margin:180px auto;
