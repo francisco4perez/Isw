@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:JavaExtensions="http:///schemas/JavaExtensions/_vlJGoDObEeeq5aRoBjqwhA/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/JavaExtensions/_vlJGoDObEeeq5aRoBjqwhA/0 JavaExtensions.profile.xmi#_vm-5tzObEeeq5aRoBjqwhA">
+  <uml:Model xmi:id="_vjFRIDObEeeq5aRoBjqwhA" name="secuencia">
+    <eAnnotations xmi:id="_vjFRITObEeeq5aRoBjqwhA" source="Objing">
+      <contents xmi:type="uml:Property" xmi:id="_vjFRIjObEeeq5aRoBjqwhA" name="exporterVersion">
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_vjFRIzObEeeq5aRoBjqwhA" value="3.0.0"/>
+      </contents>
+    </eAnnotations>
+    <ownedRule xmi:id="_vjFRJDObEeeq5aRoBjqwhA" constrainedElement="_vjF4NzObEeeq5aRoBjqwhA">
+      <specification xmi:type="uml:LiteralString" xmi:id="_vjFRJTObEeeq5aRoBjqwhA" value="&lt;Enter constraint text here>"/>
+    </ownedRule>
+    <packagedElement xmi:type="uml:Interaction" xmi:id="_vjFRJjObEeeq5aRoBjqwhA" name="Interaction">
+      <nestedClassifier xmi:type="uml:Collaboration" xmi:id="_vjFRJzObEeeq5aRoBjqwhA" name="locals"/>
+      <lifeline xmi:id="_vjFRKDObEeeq5aRoBjqwhA" name="Usuario" coveredBy="_vjFRKzObEeeq5aRoBjqwhA _vjF4QTObEeeq5aRoBjqwhA"/>
+      <lifeline xmi:id="_vjFRKTObEeeq5aRoBjqwhA" name="Buscador" coveredBy="_vjF4MDObEeeq5aRoBjqwhA _vjF4MTObEeeq5aRoBjqwhA _vjF4MjObEeeq5aRoBjqwhA _vjF4NjObEeeq5aRoBjqwhA _vjF4PDObEeeq5aRoBjqwhA _vjF4PTObEeeq5aRoBjqwhA _vjF4PjObEeeq5aRoBjqwhA _vjF4PzObEeeq5aRoBjqwhA _vjF4QDObEeeq5aRoBjqwhA"/>
+      <lifeline xmi:id="_vjFRKjObEeeq5aRoBjqwhA" name="Base de datos" coveredBy="_vjF4MzObEeeq5aRoBjqwhA _vjF4NDObEeeq5aRoBjqwhA _vjF4NTObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjFRKzObEeeq5aRoBjqwhA" covered="_vjFRKDObEeeq5aRoBjqwhA" message="_vjF4QjObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4MDObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4QjObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_vjF4MTObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" start="_vjF4MDObEeeq5aRoBjqwhA" finish="_vjF4QDObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4MjObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4RDObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4MzObEeeq5aRoBjqwhA" covered="_vjFRKjObEeeq5aRoBjqwhA" message="_vjF4RDObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_vjF4NDObEeeq5aRoBjqwhA" covered="_vjFRKjObEeeq5aRoBjqwhA" start="_vjF4MzObEeeq5aRoBjqwhA" finish="_vjF4NTObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4NTObEeeq5aRoBjqwhA" covered="_vjFRKjObEeeq5aRoBjqwhA" message="_vjF4RTObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4NjObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4RTObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:CombinedFragment" xmi:id="_vjF4NzObEeeq5aRoBjqwhA" interactionOperator="loop">
+        <ownedComment xmi:id="_vjF4ODObEeeq5aRoBjqwhA">
+          <body>Por página</body>
+        </ownedComment>
+        <operand xmi:id="_vjF4OTObEeeq5aRoBjqwhA">
+          <guard xmi:id="_vjF4OjObEeeq5aRoBjqwhA">
+            <specification xmi:type="uml:LiteralString" xmi:id="_vjF4OzObEeeq5aRoBjqwhA" value="Por pagina en paginas"/>
+          </guard>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4PDObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4RjObEeeq5aRoBjqwhA"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4PTObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4RjObEeeq5aRoBjqwhA"/>
+          <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_vjF4PjObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" start="_vjF4PTObEeeq5aRoBjqwhA" finish="_vjF4PzObEeeq5aRoBjqwhA"/>
+          <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_vjF4PzObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA"/>
+        </operand>
+      </fragment>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4QDObEeeq5aRoBjqwhA" covered="_vjFRKTObEeeq5aRoBjqwhA" message="_vjF4RzObEeeq5aRoBjqwhA"/>
+      <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vjF4QTObEeeq5aRoBjqwhA" covered="_vjFRKDObEeeq5aRoBjqwhA" message="_vjF4RzObEeeq5aRoBjqwhA"/>
+      <message xmi:id="_vjF4QjObEeeq5aRoBjqwhA" name="consulta(s : String)" receiveEvent="_vjF4MDObEeeq5aRoBjqwhA" sendEvent="_vjFRKzObEeeq5aRoBjqwhA">
+        <argument xmi:type="uml:LiteralString" xmi:id="_vjF4QzObEeeq5aRoBjqwhA" value="Consulta(s : String)"/>
+      </message>
+      <message xmi:id="_vjF4RDObEeeq5aRoBjqwhA" name="pedirPaginas(area)" receiveEvent="_vjF4MzObEeeq5aRoBjqwhA" sendEvent="_vjF4MjObEeeq5aRoBjqwhA"/>
+      <message xmi:id="_vjF4RTObEeeq5aRoBjqwhA" name="paginas" messageSort="reply" receiveEvent="_vjF4NjObEeeq5aRoBjqwhA" sendEvent="_vjF4NTObEeeq5aRoBjqwhA"/>
+      <message xmi:id="_vjF4RjObEeeq5aRoBjqwhA" name="buscar(s,pagina)" receiveEvent="_vjF4PTObEeeq5aRoBjqwhA" sendEvent="_vjF4PDObEeeq5aRoBjqwhA"/>
+      <message xmi:id="_vjF4RzObEeeq5aRoBjqwhA" name="resultados" messageSort="reply" receiveEvent="_vjF4QTObEeeq5aRoBjqwhA" sendEvent="_vjF4QDObEeeq5aRoBjqwhA"/>
+    </packagedElement>
+    <profileApplication xmi:id="_vrTZADObEeeq5aRoBjqwhA">
+      <eAnnotations xmi:id="_vrWcUDObEeeq5aRoBjqwhA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="JavaExtensions.profile.xmi#_vm-5tzObEeeq5aRoBjqwhA"/>
+      </eAnnotations>
+      <appliedProfile href="JavaExtensions.profile.xmi#_vm-5sDObEeeq5aRoBjqwhA"/>
+    </profileApplication>
+  </uml:Model>
+  <JavaExtensions:JavaInvariant xmi:id="_vrzvUDObEeeq5aRoBjqwhA" base_Element="_vjFRJDObEeeq5aRoBjqwhA"/>
+</xmi:XMI>
