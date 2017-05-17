@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login K-Search</title>
+
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/../../static/buscador/js/bootstrap.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <link rel="stylesheet" href="/../../static/buscador/css/login.css" type="text/css">
+    <link rel="stylesheet" href="/../../static/buscador/css/bootstrap/bootstrap.min.css" type="text/css">
+
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" style="margin-top: 100px">
+
+            {% if men %}
+
+                <div class="error-box alert alert-danger ">
+                  <strong>ERROR: </strong> {{ men }}
+                </div>
+
+            {% endif %}
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <strong>Login</strong>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" action="/" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">
+                            User name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="username" placeholder="User name" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label">
+                            Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group last">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-success btn-sm">
+                                Sign in</button>
+                                 <button type="reset" class="btn btn-default btn-sm">
+                                Reset</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Not Registered? <a href="/registro/">Register here</a></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-5 col-md-offset-7">
+            <p class="titulo">K-Search</p>
+        </div>
+    </div>
+
+</div>
+    
+</body>
+</html>

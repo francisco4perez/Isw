@@ -1,0 +1,32 @@
+
+-Crear una BD vacia en msql (con workbench o linea de comando):
+
+	Comando en consola mysql:   create database ksearch;
+
+-Ir al archivo settings.py y cambiar parametros en la seccion DATABASES:
+
+	NAME : ksearch
+	USER : [userMysql]
+	PASSWORD: [passMysql]
+
+-Hacer migraciones (Es decir, llevar los modelos (en models.py) a la BD indicada arriba):
+
+	$ python manage.py migrate
+	$ python manage.py makemigrations buscador
+	$ python manage.py migrate
+	$ python manage.py shell
+	>> execfile("llenar_BD.py")
+
+
+NOTAS ------------------------------------------------------------------------------------- 
+
+- Al llenar la BD se crean 3 usuarios tipo alumno:
+
+	username: Goku, Alphy o Juan
+	password: 12345
+
+- Al llenar la BD se crea el super usuario ADMIN con la contraseña ingresada en el proceso.
+Este super usuario tiene mas privilegios como el poder registrar a un usuario profesor.
+Ademas, tiene acceso al panel de admin, en el que se pueden gestionar usuarios, privilegios e incluso datos en la BD.
+
+- Para acceder al panel de admin (que viene por defecto en django, se puede sacar tambien), entrar a la ruta: localhost:8000/admin

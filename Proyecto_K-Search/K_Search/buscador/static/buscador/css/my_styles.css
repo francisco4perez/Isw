@@ -1,14 +1,13 @@
 html,body{
 	margin:0px;
-	font-family: 'Lato', sans-serif;
-	font-size: 20px;
+	font-family: 'Patua One', cursive;
+	font-size: 15px;
 	background-color: #BCFF62;
-
 	max-width: 100%;
     overflow-x: hidden;
 }
 
-a,a:visited{
+a,a:visited, a:hover, a:focus, a:active{
 	color: inherit;
 	text-decoration: none;
 }
@@ -18,20 +17,45 @@ a,a:visited{
 	font-size: 1.2em;
 }
 
-.btn{
+.boton{
 	background-color: inherit;
 	border: none;
 	outline: none;
 	text-transform: uppercase;
 	cursor: pointer;
 	font-size: 1.2em;
-	padding: 10px 120px;
+	padding: 10px 20px;
+}
+
+.boton-header{
+	margin-left: 10px;
+	margin-top: 10px;
+	background-color: inherit;
+	border: none;
+	outline: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-size: 1.2em;
+	padding: 10px 20px;
+
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
 }
 
 .header{
 	-webkit-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
 	box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+}
+
+.session-box .session-name{
+	margin-top: 20px;
+}
+
+.session-box input{
+	margin-left: 10px;
 }
 
 
@@ -47,7 +71,45 @@ a,a:visited{
 .main_div{
 	margin-top: 100px;
 	margin-bottom: 100px;
+	margin-right: auto;
+	margin-left: auto;
 }
+
+
+.formulario{
+	background-color: #A6E84D;
+}
+
+.formulario h2{
+	margin-bottom: 30px;
+	border-bottom: 1px solid black;
+	padding-bottom: 15px;
+}
+
+.formulario button{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.formulario input, select{
+	border-bottom: none !important;
+	padding-left: 5px;
+}
+
+
+.error-box{
+	font-family: "Helvetica Neue",sans-serif;
+}
+
+
+.register-icon{
+	width: 400px;
+	height: 450px;
+	margin-top: 30px;
+	margin-left: 25px;
+}
+
+
 
 .main_title{
 	font-size: 70px;
@@ -58,8 +120,15 @@ a,a:visited{
 	color: grey;
 }
 
+
+
+
 .main_images{
 	height: 300px;
+}
+
+.main_div_images{
+	margin-bottom: 100px;
 }
 
 .mini_image{
@@ -68,15 +137,9 @@ a,a:visited{
 }
 
 
-.w3-ul{list-style-type:none;padding:0;margin:0}.w3-ul li{padding:8px 16px;border-bottom:1px solid #ddd}.w3-ul li:last-child{border-bottom:none}
-.w3-card-4,.w3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
-.w3-padding-16{padding-top:16px!important;padding-bottom:30px!important}.w3-padding-24{padding-top:24px!important;padding-bottom:24px!important}
-.w3-left{float:left!important}.w3-right{float:right!important}
-.w3-margin-left{margin-left:16px!important}.w3-margin-right{margin-right:16px!important}
-.w3-circle{border-radius:50%}
 
 .resultado{
-	height:45px;
+	height:60px;
 	width: 1000px;
 	background-color: #94C08E;
 }
@@ -86,10 +149,34 @@ a,a:visited{
 }
 
 .resultado p{
+	margin-top: 0px;
 	font-size: 25px;
+	padding-top: 11px;
+}
+
+.resultado img{
+	width: 50px;
+	margin-top: 8px;
+	float: left;
 }
 
 
+
+
+.con-sombra{
+
+	-webkit-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 5px 19px 0px rgba(0,0,0,0.75);
+}
+
+
+.redondo{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
+}
 
 
 
@@ -99,6 +186,14 @@ a,a:visited{
 
 .be-green{
 	background-color: #92FF00
+}
+
+.be-yellow{
+	background-color: yellow;
+}
+
+.be-orange{
+	background-color: #f0ad4e;
 }
 
 .hr_style{
@@ -130,13 +225,12 @@ a,a:visited{
 	font-size: 1.2em;
 }
 
-.width_80{
-	width: 80%;
-	margin: 0 auto;
-}
-
 .height_200px{
 	height: 200px;
+}
+
+.padding-bottom-0{
+	padding-bottom: 0px;
 }
 
 
@@ -148,7 +242,7 @@ a,a:visited{
 /* SEARCH BOX ------------------------------------------ */
 
 .button_box2 {
-margin:180px auto;
+margin:120px auto;
 }
 /*-------------------------------------*/
 .cf:before, .cf:after{
@@ -176,7 +270,7 @@ box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
 }
 
 .form-wrapper-2 input {
-width: 710px;
+width: 680px;
 height: 50px;
 padding: 10px 5px;
 float: left;

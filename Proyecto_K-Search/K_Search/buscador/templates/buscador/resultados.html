@@ -11,18 +11,23 @@
             
                 <h1>Resultados de la busqueda</h1>
 
-                <ul class="w3-ul w3-card-4">
+                <ul class="no-list">
 
-                    {% if lista_urls %}
+                    {% if resultados %}
 
-                        {% for url in lista_urls %}
+                        {% for resultado in resultados %}
 
-                            <a href="{{ url }}" target="_blank">
+                            <a href="{{ resultado.link }}" target="_blank">
 
-                              <li class="w3-padding-16 resultado">
+                              <li class="resultado">
 
+                              <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
+
+                              <p>{{ resultado.name }}</p>
+
+                              <!--
                                 <img class="w3-left w3-circle w3-margin-right" src="../../static/buscador/Images/mapas-y-banderas.png" style="width:50px; margin-bottom:4px">
-                                <p>{{ url }}</p>
+                                -->
                                 
                               </li>
                             </a>
