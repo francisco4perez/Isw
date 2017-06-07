@@ -4,33 +4,44 @@
 
 <body>
 
-    <div class="no-list row center-xs middle-xs">
+    <div class="container-fluid main_div2 formulario2 con-sombrita">
         <div style="min-height:1000px">
             {% csrf_token %}
-            <div class="main_div">
+            <div>
             
-                <h1>Resultados de la busqueda</h1>
+                <h2>Resultados de la busqueda</h2>
 
-                <ul class="no-list">
+                <p class="instruction">Selecciona los links de los cuales extraer contenidos</p>
 
+                <ul class="row center-xs middle-xs no-list">
+
+                    <form action="resultados/" method="post" name="urls_a_extraer" id="urls_a_extraer">
+
+                    {% csrf_token %}
                     {% if resultados %}
 
                         {% for resultado in resultados %}
 
-                            <a href="{{ resultado.link }}" target="_blank">
+                            <div class="col-md-10">
+                                <a href="{{ resultado.link }}" target="_blank">
 
-                              <li class="resultado">
+                                      <li class="resultado">
 
-                              <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
+                                          <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
 
-                              <p>{{ resultado.name }}</p>
+                                          <p>{{ resultado.name }}</p>
+                                        
+                                      </li>
+                                </a>
+                            </div>
 
-                              <!--
-                                <img class="w3-left w3-circle w3-margin-right" src="../../static/buscador/Images/mapas-y-banderas.png" style="width:50px; margin-bottom:4px">
-                                -->
-                                
-                              </li>
-                            </a>
+                            <div class="col-md-2">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="seleccion-link" value="{{ resultado.index }}" required>Seleccionar</label>
+                                </div>
+                            </div>
+
+            
 
                         {% endfor %}
 
@@ -41,6 +52,10 @@
                     {% endif %}
 
                 </ul>
+
+                <button type="submit" id="btn_contenidos" class="btn btn-warning btn-lg">Extraer Contenidos</button>
+
+              </form>
             </div>
         </div>
     </div>

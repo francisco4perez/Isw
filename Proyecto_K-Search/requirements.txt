@@ -1,0 +1,7 @@
+beautifulsoup4==4.3.2
+contextlib2==0.5.5
+Django==1.11
+Google-Search-API==1.1.13
+html2text==2016.9.19
+html5lib==0.999
+numpy==1.11.2

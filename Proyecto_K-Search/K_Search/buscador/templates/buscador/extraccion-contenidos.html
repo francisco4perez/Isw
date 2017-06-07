@@ -1,0 +1,107 @@
+{% extends 'buscador/header.html' %}
+
+    {% block content %}
+
+    <script src="/../../static/buscador/js/masonry.pkgd.js"></script>
+
+<body>
+
+    <div class="container-fluid main_div2 formulario2 con-sombrita">
+        <div class="d-flex flex-nowrap" style="min-height:1000px">
+            {% csrf_token %}
+            <div>
+            
+                <h2>Extraccion de contenidos</h2>
+
+                <p class="instruction">Selecciona los contenidos a guardar en el sistema</p>
+
+
+                <ul class="row center-xs middle-xs no-list">
+                
+
+                    {% if contenidos %}
+                        
+                        <select class="contenidos" multiple hidden disabled>
+
+                        {% for i in range_contenidos %}    
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+
+                        </select>
+
+
+                        <select class="imagenes" multiple hidden disabled>
+
+                        {% for j in range_links_imagenes %}    
+                            <option value="{{ j }}">{{ j }}</option>
+                        {% endfor %}
+
+                        </select>
+
+
+                        <div class="grid">
+
+                            <div class="container">
+                                <div class="row seccion-extraccion-contenidos">
+                                    <div class="col-md-1">
+                                        <img id="seccion-option1" src="../../static/buscador/Images/play-button.png">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Contenidos</p>
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-9"></div>
+                                </div>
+                            </div>
+
+                            <div class="row div-contenidos">
+
+                            {% for contenido in contenidos %}
+
+                                <div id="{{ contenido.index }}" class="grid-item con-sombrita cont">
+                                    {{ contenido.text|linebreaksbr }}
+                                </div>
+
+                            {% endfor %}
+
+                            </div>
+                            
+                            <div class="container">
+                                <div class="row seccion-extraccion-imagenes">
+                                    <div class="col-md-1">
+                                        <img id="seccion-option2" src="../../static/buscador/Images/play-button.png">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Imagenes</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row div-imagenes">
+                                
+                            {% for link in links_imagenes %}
+
+                                <div id="{{ link.index }}" class="grid-item con-sombrita img">
+                                    <img class="imagen" src="{{ link.text }}">
+                                </div>
+
+                            {% endfor %}
+
+                            </div>
+
+
+                        </div>
+
+                    {% else %}
+
+                        <h2>No se han encontrado contenidos</h2>
+                        
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
