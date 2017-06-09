@@ -10,7 +10,7 @@ import re
 from bs4 import BeautifulSoup
 from django.shortcuts import render
 from buscador.models import *
-from django.contrib.auth.models import User #// Sistema de usuarios proporcionado por Django
+from django.contrib.auth.models import User, Group, Permission #// Sistema de usuarios proporcionado por Django
 from django.shortcuts import get_object_or_404, render, redirect #// Tribial de django
 from django.http import HttpResponseRedirect, HttpResponse #// En caso de no querer hacer render
 from django.core.urlresolvers import reverse
@@ -233,6 +233,9 @@ def registro_view(request):
 			if tipo_usuario == "Profesor":
 				tipo_usuario = 0
 
+			elif tipo_usuario == "Alumno":
+				tipo_usuario = 1
+
 		# Verificacion de informacion ingresada
 
 		username_search = User.objects.filter(username = username)
@@ -248,6 +251,14 @@ def registro_view(request):
 
 					up = UserProfile(user=user, institucion=institucion, tipo_usuario = tipo_usuario,fecha_nac=fecha_nacimiento.date())
 					up.save()
+
+					alumnos_group = Group.objects.get(name="Alumnos")
+					profesores_group = Group.objects.get(name="Profesores")
+
+					if(tipo_usuario == 0):
+						user.groups.add(profesores_group)
+					elif(tipo_usuario == 1):
+						user.groups.add(alumnos_group)
 
 					return HttpResponseRedirect("/buscador")
 
@@ -270,6 +281,7 @@ def registro_view(request):
 def resultados_view(request):
 
 	# Verificacion de usuario
+	es_admin = 0
 	conected = 0
 	can_crud_contenidos = 0
 
@@ -281,6 +293,9 @@ def resultados_view(request):
 
 		if u.has_perm("buscador.can_crud_contenidos"):
 			can_crud_contenidos = 1
+
+		if request.user.username == "ADMIN":
+			es_admin = 1
 
 		if request.GET.get('salir'):
 			return logout_view(request)
@@ -314,7 +329,7 @@ def resultados_view(request):
 
 
 
-		context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos,
+		context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos,"es_admin":es_admin,
 		"contenidos":lista_contenidos,"contenidos":lista_contenidos,"range_contenidos":range(len(lista_contenidos)),
 		"links_imagenes":lista_links_imagenes,"range_links_imagenes":range(len(lista_links_imagenes))}
 
@@ -332,6 +347,7 @@ def resultados_view(request):
 def extraccion_contenidos(request):
 
 	# Verificacion de usuario
+	es_admin = 0
 	conected = 0
 	can_crud_contenidos = 0
 
@@ -344,6 +360,9 @@ def extraccion_contenidos(request):
 		if u.has_perm("buscador.can_crud_contenidos"):
 			can_crud_contenidos = 1
 
+		if request.user.username == "ADMIN":
+			es_admin = 1
+
 		if request.GET.get('salir'):
 			return logout_view(request)
 
@@ -352,107 +371,59 @@ def extraccion_contenidos(request):
 		pass
 
 
-	context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos}
+	context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos, "es_admin":es_admin}
 
 	return render(request, 'buscador/extraccion-contenidos.html',context)
 
 
 
-
-
-
-
-
-'''
-
-
-
-
-conected = 0
-	can_inscribe_p = 0
-	can_inscribe_g = 0
-
-	if request.user.is_authenticated():
-		conected = 1
-
-		u = request.user
-		up = UserProfile.objects.get(user = u)
-		u_name = up.user_name
-
-		if u.has_perm("buscador.can_inscribe_g"):
-			can_inscribe_g = 1
-
-		if u.has_perm("buscador.can_inscribe_p"):
-			can_inscribe_p = 1
-
-
-		
-		if request.GET.get('btn'):
-			return logout_view(request)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @login_required(login_url="/")
-def add_to_calendar(request, sel_g=None):
+def paginas_de_confianza(request):
 
-	# Variables varias
-	post = 0
+	# Verificacion de usuario
+	es_admin = 0
 	conected = 0
-	can_inscribe_p = 0
-	can_inscribe_g = 0
-	valid_date = 0
-
-	# Autentificacion de permisos
+	can_crud_contenidos = 0
+	men = ""
 
 	if request.user.is_authenticated():
 		conected = 1
 
 		u = request.user
-		up = UserProfile.objects.get(user = u)
-		u_name = up.user_name
-		country = up.country
+		u_name = u.username
 
-		if u.has_perm("buscador.can_inscribe_g"):
-			can_inscribe_g = 1
+		if u.has_perm("buscador.can_crud_contenidos"):
+			can_crud_contenidos = 1
 
-		if u.has_perm("buscador.can_inscribe_p"):
-			can_inscribe_p = 1
+		if request.user.username == "ADMIN":
+			es_admin = 1
 
-		if request.GET.get('btn'):
+		if request.GET.get('salir'):
 			return logout_view(request)
 
-
-	if not can_inscribe_g and u_name != "ADMIN":
-		get_object_or_404(Calendar, pk=-1)
-
-
-	# Si se utiliza el metodo POST en esta ruta
+	paginas_de_confianza = PaginaDeConfianza.objects.all()
 
 	if request.method == "POST":
 
-		# Ejemplos sacando valores del formulario (de cada input)
-		bol = request.POST.get("bol")
-		sel_grade = request.POST.get("sel_cal")
-		cal_name = request.POST.get("cal_name")
-		programation_status = request.POST.get("programation_status")
-		ejecution_status = request.POST.get("ejecution_status")
+		delete_dominio = request.POST.get('delete_id')
+		
+		if delete_dominio == "" or delete_dominio == None:
 
-	# Hacer cosas con los valores Y...
+			url = request.POST['url']
+			pags = PaginaDeConfianza.objects.filter(dominio=url)
 
-	# Retornar resultados en el context
-	context = {'grade_list' : grade_list, 'provider_list' : provider_list, 'ceco_list' : ceco_list,'conected' : conected, 'u_name' : u_name, 'country' : country, 'post' : post, 'ceco_s' : ceco_s,'c' : c, 'men' : men, 'sel_g' : sel_g}
-	
-	return render(request, 'buscador/add_to_calendar.html',context)
-'''
+			if len(pags) == 0:
+				pag = PaginaDeConfianza(dominio=url)
+				pag.save()
+			else:
+				men = "YA EXISTE LA PAGINA DE CONFIANZA INGRESADA"
+
+		else:
+			deleted_page = PaginaDeConfianza.objects.get(dominio=delete_dominio)
+			deleted_page.delete()
+
+
+	context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos,
+	 "es_admin":es_admin,"paginas_de_confianza":paginas_de_confianza, "men":men}
+
+	return render(request, 'buscador/paginas_de_confianza.html',context)

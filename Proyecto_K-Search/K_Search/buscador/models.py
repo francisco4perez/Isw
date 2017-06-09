@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from datetime import datetime
 #from .UserProfile.models import UserProfile
 #import sys
 #sys.path.append('./UserProfile')
@@ -26,9 +27,7 @@ class Contenido(models.Model):
 
 class PaginaDeConfianza(models.Model):
 	dominio = models.CharField(max_length = 200,unique=True)
-	fecha_pagina = models.DateField()
-
-	area = models.ForeignKey("Area")
+	fecha_pagina = models.DateField(default=timezone.now)
 
 	def __str__(self):
 		return self.dominio
@@ -48,6 +47,8 @@ class Feedback(models.Model):
 class Area(models.Model):
 	nombre_area = models.CharField(max_length = 100)
 	descripcion_area = models.CharField(max_length = 200)
+
+	paginas_de_confianza = models.ManyToManyField("PaginaDeConfianza")
 
 	def __str__(self):
 		return self.nombre_area
@@ -87,3 +88,10 @@ class Institucion(models.Model):
 
 	def __str__(self):
 		return self.nombre_institucion
+
+
+class Tags(models.Model):
+	nombre_tag = models.CharField(max_length = 40)
+
+	def __str__(self):
+		return self.nombre_tag

@@ -23,9 +23,20 @@
 
             {% if conected %}
                 
-                {% if es_admin %}
-
-                    <li class="col-md col-xs"><a href="/registro/">Registrar usuario</a></li>
+                {% if can_crud_contenidos %}
+                    <!--
+                    <li class="col-md col-xs"><a href="/registro/">Registrar usuario</a></li>-->
+                    
+                    <div class="dropdown">
+                      <button class="dropbtn">Opciones</button>
+                      <div class="dropdown-content">
+                        {% if es_admin %}
+                        <a href="/admin/">Panel Administración</a>
+                        <a href="/registro/">Registrar Usuario</a>
+                        {% endif %}
+                        <a href="/buscador/paginas-de-confianza/">Paginas de Confianza</a>
+                      </div>
+                    </div>
 
                 {% endif %}
 

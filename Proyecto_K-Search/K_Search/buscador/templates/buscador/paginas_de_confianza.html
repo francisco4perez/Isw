@@ -1,0 +1,99 @@
+{% extends 'buscador/header.html' %}
+
+    {% block content %}
+
+<body>
+
+    {% if men %}
+
+    <br>
+    <div class="container-fluid">
+        <div class="alert alert-danger error-box">
+          <strong>ERROR: </strong> {{ men }}
+        </div>
+    </div>
+
+        
+
+    {% endif %}
+
+    <div class="container-fluid main_div2 formulario2 con-sombrita">
+        <div style="min-height:1000px">
+            {% csrf_token %}
+            <div>
+                <div class="row middle-xs">
+                    <div class="col-md-10">
+                        <h2>Paginas de Confianza</h2>
+                    </div>
+                    <div class="col-md-2">
+                        <nav>
+                            <ul class="ext-nav">
+                                <li id="login">
+                                    <a margin-right="40px">Añadir +</a>
+                                        <form id="login-form" action="/buscador/paginas-de-confianza/" method="post">
+                                        {% csrf_token %}
+                                            <p><input class="text" type="text" name="url" placeholder="http://www.." /></p>
+                                            <p><input class="submit btn" type="submit" value="Agregar" /></p>
+                                        </form>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                </div>
+                
+
+                <p class="instruction">Estos son los links a los cuales se les dara prioridad en las busquedas de contenidos</p>
+
+                <br>
+
+                <ul class="row center-xs middle-xs no-list">
+
+                    <form action="/buscador/paginas-de-confianza/" method="post" id="delete_form">
+
+                    {% csrf_token %}
+                    {% if paginas_de_confianza %}
+
+                        <input type="text" id="delete_id" name="delete_id" hidden>
+
+                        {% for pagina in paginas_de_confianza %}
+
+                            <div class="col-md-10">
+                                <a href="{{ pagina.dominio }}" target="_blank">
+
+                                      <li class="resultado">
+
+                                          <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
+
+                                          <p>{{ pagina.dominio|truncatechars:50 }}</p>
+                                        
+                                      </li>
+                                </a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div>
+                                    <img name="delete" id="{{ pagina.dominio }}" class="delete" src="/../../static/buscador/Images/delete.png" >
+
+                                </div>
+                            </div>
+
+            
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <h2>No se han encontrado paginas de confianza</h2>
+                        
+                    {% endif %}
+
+                </ul>
+
+              </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

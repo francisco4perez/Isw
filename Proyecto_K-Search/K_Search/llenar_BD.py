@@ -16,6 +16,30 @@ for inst_name in instituciones:
       inst.save()
 
 
+print "Paginas de Confianza"
+
+paginas = ["http://www.howstuffworks.com/","http://www.lawebdefisica.com/",
+"http://www.livescience.com/","https://www.nasa.gov/","https://www.sciencedaily.com/"]
+
+for pagina in paginas:
+
+      p = PaginaDeConfianza(dominio=pagina)
+      p.save()
+
+
+print "Areas"
+
+areas = ["FISICA","MATEMATICA","INGENIERIA DE SOFTWARE","HUMANISTICA"]
+
+for area in areas:
+
+	paginas_bd = PaginaDeConfianza.objects.all()
+
+	a = Area(nombre_area=area,descripcion_area="Area con fundamentos en "+area)
+	a.save()
+	a.paginas_de_confianza.set(paginas_bd)
+	a.save()
+
 # Users
 print "Users"
 

@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ksearch',
         'USER' : 'root',
-        'PASSWORD' : 'palpadv2',
+        'PASSWORD' : '1234',
         'HOST' : '',
 
         'OPTIONS': {

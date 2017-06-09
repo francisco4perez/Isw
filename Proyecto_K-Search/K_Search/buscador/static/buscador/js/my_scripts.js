@@ -19,24 +19,9 @@ $(document).ready(function(){
     },100);
 
 
-    /*
-    $('.grid').masonry({
-	  // options
-	  itemSelector: '.grid-item',
-	  columnWidth: 200
+    $("#login").hover(function() {
+		$("#login-form").slideToggle();
 	});
-
-	input_search.keyup(function(e){
-		if(e.keyCode == 13){
-			if(input_search.val()){
-				boton_search.click();
-			}
-		}
-	});
-
-	$(".seccion-extraccion-imagenes").trigger("click");
-	
-	*/
 
 
 	$("#btn_contenidos").on("click",function(){
@@ -118,7 +103,13 @@ $(document).ready(function(){
 
 	});
 
+	$(".delete").on("click",function(){
 
+		var dominio = $(this).attr("id");
 
+		$("#delete_id").val(dominio);
+		$("#delete_form").submit();
+
+	});
 
 });
