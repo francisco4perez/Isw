@@ -343,6 +343,30 @@ border-top: 2px solid black;
 .padding-bottom-0{
 	padding-bottom: 0px;
 }
+
+/* STARS CALIFICATION ---------------------------------- */
+
+.rate-base-layer{
+	color: white;
+}
+.rate-hover-layer{
+    color: black;
+}
+.rate .rate-select-layer{
+    color: red;
+}
+.rate, .rate2{
+    font-size: 35px;
+    margin-top: 3px;
+}
+.rate2 .rate-hover-layer{
+    color: pink;
+}
+.rate2 .rate-select-layer{
+    color: red;
+}
+
+
 /* AÑADIR PAGINAS DE CONFIANZA ------------------------- */
 
 #login {

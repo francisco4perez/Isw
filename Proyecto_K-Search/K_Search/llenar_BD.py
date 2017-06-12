@@ -63,6 +63,11 @@ print "------------------Creacion ADMIN-----------------------"
 print "Por favor ingresar el nombre: ADMIN y cualquier contrasenia!"
 subprocess.call(['./manage.py', "createsuperuser"])
 
+admin = User.objects.get(username="ADMIN")
+
+ad = UserProfile(user=admin, institucion=institucion, fecha_nac=fecha_nacimiento.date())
+ad.save()
+
 
 
 # Groups (De permisos)

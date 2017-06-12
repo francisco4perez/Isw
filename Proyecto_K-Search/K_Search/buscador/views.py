@@ -37,6 +37,13 @@ class Informacion(object):
 		self.imagenes = imagenes
 		self.index = index
 
+
+class Pagina_Rating(object):
+	def __init__(self, pagina,rating):
+		super(Pagina_Rating, self).__init__()
+		self.pagina = pagina
+		self.rating = rating
+
 		
 
 
@@ -402,28 +409,74 @@ def paginas_de_confianza(request):
 			return logout_view(request)
 
 	paginas_de_confianza = PaginaDeConfianza.objects.all()
+	up = UserProfile.objects.get(user=u)
+	paginas_rating = []
+
+	#ratings_actuales = []
+
+	for pagina in paginas_de_confianza:
+
+		rating = RatingPagina.objects.filter(user=up,pagina_confianza=pagina)
+
+		if(len(rating)==0):
+			pag_rat = Pagina_Rating(pagina,0)
+			paginas_rating.append(pag_rat)
+			#ratings_actuales.append(0)
+
+		else:
+			r = rating[0]
+			pag_rat = Pagina_Rating(pagina,r.rating)
+			paginas_rating.append(pag_rat)
+			#ratings_actuales.append(r.rating)
+
 
 	if request.method == "POST":
 
 		delete_dominio = request.POST.get('delete_id')
+		change_rating = request.POST.get("change_rating")
+		print change_rating
 		
 		if delete_dominio == "" or delete_dominio == None:
 
-			url = request.POST['url']
-			pags = PaginaDeConfianza.objects.filter(dominio=url)
+			if(change_rating != None and len(change_rating) > 1):
 
-			if len(pags) == 0:
-				pag = PaginaDeConfianza(dominio=url)
-				pag.save()
+				changed_rating_ids = set(map(int,change_rating.split(","))[1:])
+				ratings_nuevos = request.POST.getlist("input_rate")
+
+				for ide in changed_rating_ids:
+					pagina = paginas_de_confianza[ide-1]
+					ratings_user = RatingPagina.objects.filter(user=up,pagina_confianza=pagina)
+
+					if(len(ratings_user) == 0):
+						r = RatingPagina(rating=ratings_nuevos[ide-1],user=up,pagina_confianza=pagina)
+						r.save()
+					else:
+						r = ratings_user[0]
+						r.rating = ratings_nuevos[ide-1]
+						r.save()
+
+				return HttpResponseRedirect("/buscador/paginas-de-confianza/")
+
 			else:
-				men = "YA EXISTE LA PAGINA DE CONFIANZA INGRESADA"
+
+				url = request.POST['url']
+				pags = PaginaDeConfianza.objects.filter(dominio=url)
+
+				if len(pags) == 0:
+					pag = PaginaDeConfianza(dominio=url)
+					pag.save()
+					return HttpResponseRedirect("/buscador/paginas-de-confianza/")
+				else:
+					men = "YA EXISTE LA PAGINA DE CONFIANZA INGRESADA"
 
 		else:
+
 			deleted_page = PaginaDeConfianza.objects.get(dominio=delete_dominio)
 			deleted_page.delete()
+			return HttpResponseRedirect("/buscador/paginas-de-confianza/")
 
 
 	context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos,
-	 "es_admin":es_admin,"paginas_de_confianza":paginas_de_confianza, "men":men}
+	 "es_admin":es_admin,"paginas_rating":paginas_rating, "men":men}
 
 	return render(request, 'buscador/paginas_de_confianza.html',context)

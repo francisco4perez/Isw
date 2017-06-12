@@ -33,6 +33,15 @@ class PaginaDeConfianza(models.Model):
 		return self.dominio
 
 
+class RatingPagina(models.Model):
+	rating = models.IntegerField(default=0)
+	
+	user = models.ForeignKey("UserProfile", on_delete=models.CASCADE)
+	pagina_confianza = models.ForeignKey("PaginaDeConfianza", on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.rating
+
 
 class Feedback(models.Model):
 	descripcion_feedback = models.CharField(max_length = 100)
@@ -71,7 +80,7 @@ class UserProfile(models.Model):
 	institucion = models.CharField(max_length = 100, default="USM")
 	fecha_nac = models.DateField()
 
-	paginas_confianza = models.ManyToManyField("PaginaDeConfianza")
+	user_ratings = models.ManyToManyField("RatingPagina")
 
 	def __str__(self):
 		return self.user.username

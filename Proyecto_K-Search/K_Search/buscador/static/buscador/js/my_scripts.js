@@ -12,7 +12,6 @@ $(document).ready(function(){
     var input_search = $('#search');
 	var boton_search = $("#btn-search");
 
-
 	// Se clickea al cargar la pagina
 	setTimeout(function() {
         $(".seccion-extraccion-imagenes").trigger('click');
@@ -111,5 +110,36 @@ $(document).ready(function(){
 		$("#delete_form").submit();
 
 	});
+
+	// STARS CALIFICATION -----------------------------
+
+	var options = {
+        max_value: 5,
+        step_size: 1,
+        initial_value: 3,
+    }
+
+    var change = false;
+
+    $(".rate").rate(options);
+
+   	$(".rate").on("change", function(ev, data){
+        if(!change){
+        	change = true;
+        	$("#btn_save").show();
+        }
+
+        var actual_val = $("#change_rating").val();
+        $("#change_rating").val(actual_val+","+$(this).attr("id"));
+    });
+
+   	
+
+
+    //$(".rate2").on("change", function(ev, data){
+    //    console.log(data.from, data.to);
+    //});
+
+	// ------------------------------------------------
 
 });

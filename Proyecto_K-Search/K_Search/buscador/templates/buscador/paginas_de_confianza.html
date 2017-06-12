@@ -49,38 +49,54 @@
 
                 <ul class="row center-xs middle-xs no-list">
 
-                    <form action="/buscador/paginas-de-confianza/" method="post" id="delete_form">
+                    
 
                     {% csrf_token %}
-                    {% if paginas_de_confianza %}
+                    {% if paginas_rating %}
 
-                        <input type="text" id="delete_id" name="delete_id" hidden>
-
-                        {% for pagina in paginas_de_confianza %}
+                        <form action="/buscador/paginas-de-confianza/" method="post" id="delete_form">
+                        {% csrf_token %}
+                            <input type="text" id="delete_id" name="delete_id" hidden>
+                        </form>
+                        
+                        <form action="/buscador/paginas-de-confianza/" method="post" id="rating_form">
+                        {% csrf_token %}
+                        <input type="text" id="change_rating" name="change_rating" value="0" hidden>
+                        {% for pagina in paginas_rating %}
 
                             <div class="col-md-10">
-                                <a href="{{ pagina.dominio }}" target="_blank">
 
                                       <li class="resultado">
-
-                                          <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
-
-                                          <p>{{ pagina.dominio|truncatechars:50 }}</p>
+                                        <a href="{{ pagina.pagina.dominio }}" target="_blank">
+                                            <div class="col-md-1">
+                                                <img src="/../../static/buscador/Images/mapas-y-banderas.png" >
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ pagina.pagina.dominio|truncatechars:45 }}</p>
+                                            </div>
+                                        </a>
                                         
+                                            <div class="col-md-3">
+                                                <div class="rate" data-rate-value="{{ pagina.rating }}" data-rate-input="#{{ forloop.counter }}.input_rate" id="{{ forloop.counter }}" ></div>
+                                                <input class="input_rate" name="input_rate" id="{{ forloop.counter }}" type="text" name="rating_{{ pagina.pagina.dominio }}" hidden>
+                                            </div>
+
                                       </li>
-                                </a>
                             </div>
 
-                            <div class="col-md-2">
-                                <div>
-                                    <img name="delete" id="{{ pagina.dominio }}" class="delete" src="/../../static/buscador/Images/delete.png" >
+                            {% if es_admin %}
 
+                                <div class="col-md-2">
+                                    <div>
+                                        <img name="delete" id="{{ pagina.pagina.dominio }}" class="delete" src="/../../static/buscador/Images/delete.png" >
+
+                                    </div>
                                 </div>
-                            </div>
-
-            
+                            {% endif %}
 
                         {% endfor %}
+
+                        
 
                     {% else %}
 
@@ -90,7 +106,10 @@
 
                 </ul>
 
-              </form>
+                <button type="submit" id="btn_save" class="btn btn-warning btn-lg" style="display:none">Guardar Cambios</button>
+
+                </form>
+
             </div>
         </div>
     </div>
