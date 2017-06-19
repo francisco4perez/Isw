@@ -6,6 +6,8 @@ import numpy as np
 import urllib
 import sys
 import re
+import urlparse
+import urllib2
 
 from bs4 import BeautifulSoup
 from django.shortcuts import render
@@ -50,6 +52,19 @@ class Pagina_Rating(object):
 # Funcion que retorna true o false si la seccion ingresada es una lista muy larga
 def lista_larga(seccion):
 	return len(seccion.split(" * ")) > 7
+
+
+def existe_pagina(url):
+	if url[:4] != "http":
+		url = "http://"+url
+
+	print url
+	try:
+	    urllib2.urlopen(url)
+	    return True
+	except Exception as e:
+	    return False
+
 
 # Funcion que extrae contenidos relevantes (solo texto) dada una url
 def contenidos_relevantes(url):
@@ -96,7 +111,21 @@ def extraer_links_imagenes(url):
 
 	for img in imgs:
 		if(con <= LIMITE):
-			links.append(img["src"])
+			src = img["src"]
+			res = urlparse.urlparse(url)
+			url_base = res.netloc
+
+			if src[0] == "/" and src[:2] != "//":
+				if len(url_base) > 0:
+					src = "http://"+url_base+src
+
+			elif url[-4:] == ".php" or url[-5:] == ".html":
+
+				if(len(urlparse.urlparse(src).netloc) == 0):
+					path = res.path
+					src = "http://"+url_base+"/".join(path.split("/")[:-1])+"/"+src
+
+			links.append(src)
 			con+=1
 
 	return links
@@ -458,16 +487,21 @@ def paginas_de_confianza(request):
 				return HttpResponseRedirect("/buscador/paginas-de-confianza/")
 
 			else:
-
+				# Añadir Pagina de confianza
 				url = request.POST['url']
-				pags = PaginaDeConfianza.objects.filter(dominio=url)
 
-				if len(pags) == 0:
-					pag = PaginaDeConfianza(dominio=url)
-					pag.save()
-					return HttpResponseRedirect("/buscador/paginas-de-confianza/")
+				if existe_pagina(url):
+
+					pags = PaginaDeConfianza.objects.filter(dominio=url)
+
+					if len(pags) == 0:
+						pag = PaginaDeConfianza(dominio=url)
+						pag.save()
+						return HttpResponseRedirect("/buscador/paginas-de-confianza/")
+					else:
+						men = "YA EXISTE LA PAGINA DE CONFIANZA INGRESADA"
 				else:
-					men = "YA EXISTE LA PAGINA DE CONFIANZA INGRESADA"
+					men = "LA PAGINA DE CONFIANZA INGRESADA NO ES VALIDA"
 
 		else:
 

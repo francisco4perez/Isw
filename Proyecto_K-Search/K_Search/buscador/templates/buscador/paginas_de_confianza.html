@@ -4,20 +4,21 @@
 
 <body>
 
+    
+
+    <div class="container-fluid main_div2 formulario2 con-sombrita">
+
     {% if men %}
 
     <br>
-    <div class="container-fluid">
+    <div>
         <div class="alert alert-danger error-box">
           <strong>ERROR: </strong> {{ men }}
         </div>
     </div>
 
-        
-
     {% endif %}
 
-    <div class="container-fluid main_div2 formulario2 con-sombrita">
         <div style="min-height:1000px">
             {% csrf_token %}
             <div>
@@ -32,7 +33,7 @@
                                     <a margin-right="40px">Añadir +</a>
                                         <form id="login-form" action="/buscador/paginas-de-confianza/" method="post">
                                         {% csrf_token %}
-                                            <p><input class="text" type="text" name="url" placeholder="http://www.." /></p>
+                                            <p><input class="text" type="text" name="url" placeholder="http://www.." required></p>
                                             <p><input class="submit btn" type="submit" value="Agregar" /></p>
                                         </form>
                                 </li>
