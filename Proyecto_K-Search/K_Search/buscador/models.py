@@ -16,9 +16,12 @@ from datetime import datetime
 class Contenido(models.Model):
 	tipo_contenido = models.CharField(max_length = 30)
 	descripcion_contenido = models.CharField(max_length = 150, default = "")
-	info = models.CharField(max_length = 500)
+	info = models.CharField(max_length = 10000)
+	dominio_fuente = models.CharField(max_length = 200, default="")
+	busqueda = models.CharField(max_length = 200, default="")
 
-	area = models.ForeignKey("Area")
+
+	tag = models.ForeignKey("Tag")
 
 	def __str__(self):
 		return self.info
@@ -57,6 +60,7 @@ class Area(models.Model):
 	nombre_area = models.CharField(max_length = 100)
 	descripcion_area = models.CharField(max_length = 200)
 
+	contenidos = models.ManyToManyField("Contenido")
 	paginas_de_confianza = models.ManyToManyField("PaginaDeConfianza")
 
 	def __str__(self):
@@ -99,8 +103,15 @@ class Institucion(models.Model):
 		return self.nombre_institucion
 
 
-class Tags(models.Model):
+class Tag(models.Model):
 	nombre_tag = models.CharField(max_length = 40)
+
+	def __str__(self):
+		return self.nombre_tag
+
+class Busqueda(models.Model):
+	texto_buscado = models.CharField(max_length = 100)
+	fecha_busqueda = models.DateField(default=timezone.now)
 
 	def __str__(self):
 		return self.nombre_tag

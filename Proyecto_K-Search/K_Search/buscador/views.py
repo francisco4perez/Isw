@@ -53,12 +53,10 @@ class Pagina_Rating(object):
 def lista_larga(seccion):
 	return len(seccion.split(" * ")) > 7
 
-
+# Funcion que verifica si la url corresponde a una pagina que realmente existe
 def existe_pagina(url):
 	if url[:4] != "http":
 		url = "http://"+url
-
-	print url
 	try:
 	    urllib2.urlopen(url)
 	    return True
@@ -106,27 +104,30 @@ def extraer_links_imagenes(url):
 	html = urllib.urlopen(url)
 	soup = BeautifulSoup(html)
 	imgs = soup.findAll('img',{"src":True})
+
+	res = urlparse.urlparse(url)
+	url_base = res.netloc
 	
 	LIMITE = 10
 
 	for img in imgs:
 		if(con <= LIMITE):
 			src = img["src"]
-			res = urlparse.urlparse(url)
-			url_base = res.netloc
 
-			if src[0] == "/" and src[:2] != "//":
-				if len(url_base) > 0:
-					src = "http://"+url_base+src
+			if len(src) != 0:
 
-			elif url[-4:] == ".php" or url[-5:] == ".html":
+				if src[0] == "/" and src[:2] != "//":
+					if len(url_base) > 0:
+						src = "http://"+url_base+src
 
-				if(len(urlparse.urlparse(src).netloc) == 0):
-					path = res.path
-					src = "http://"+url_base+"/".join(path.split("/")[:-1])+"/"+src
+				elif url[-4:] == ".php" or url[-5:] == ".html":
 
-			links.append(src)
-			con+=1
+					if(len(urlparse.urlparse(src).netloc) == 0):
+						path = res.path
+						src = "http://"+url_base+"/".join(path.split("/")[:-1])+"/"+src
+
+				links.append(src)
+				con+=1
 
 	return links
 
@@ -168,7 +169,11 @@ def index(request):
 	if request.method == "POST":
 
 		busqueda = request.POST.get("search")
+		request.session["busqueda"] = busqueda
 		resultados = google.search(busqueda,2)
+
+		b = Busqueda(texto_buscado=busqueda)
+		b.save()
 
 		lista_urls = []
 		for res in resultados:
@@ -345,25 +350,29 @@ def resultados_view(request):
 		lista_contenidos = []
 		lista_links_imagenes = []
 
+		texto_contenidos = []
+		url_imgs = []
+
 		for i in ids_links_selected:
-			contenidos = contenidos_relevantes(links[int(i)])
-			links_imagenes = extraer_links_imagenes(links[int(i)])
+			url_link = links[int(i)]
+			contenidos = contenidos_relevantes(url_link)
+			links_imagenes = extraer_links_imagenes(url_link)
 
 			for cont in contenidos:
+				texto_contenidos.append((cont,url_link))
+
 				obj_cont = contenido(cont,len(lista_contenidos))
 				lista_contenidos.append(obj_cont)
 
 			for link in links_imagenes:
+				url_imgs.append((link,url_link))
+
 				obj_cont = contenido(link,len(lista_links_imagenes))
 				lista_links_imagenes.append(obj_cont)
-			
-			#informacion = Informacion(contenidos,links_imagenes,len(lista_informaciones))
-			#lista_informaciones.append(informacion)
-
-			#context
-			#"range_contenidos":range(len(lista_contenidos)), "links_imagenes":links_imagenes
 
 
+		request.session["texto_contenidos"] = texto_contenidos
+		request.session["url_imgs"] = url_imgs
 
 		context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos,"es_admin":es_admin,
 		"contenidos":lista_contenidos,"contenidos":lista_contenidos,"range_contenidos":range(len(lista_contenidos)),
@@ -404,12 +413,105 @@ def extraccion_contenidos(request):
 
 
 	if request.method == "POST":
-		pass
+		
+		texto_contenidos = request.session["texto_contenidos"]
+		links_imagenes = request.session["url_imgs"]
+
+		ids_selected_contents = request.POST.getlist("contenidos")
+		ids_selected_imgs = request.POST.getlist("imagenes")
+
+		busqueda = request.session["busqueda"]
+		t = Tag.objects.get(nombre_tag="SIN TAG")
+
+		for i in ids_selected_contents:
+			contenido, link = texto_contenidos[int(i)]
+			c = Contenido(tipo_contenido="texto",info=contenido,dominio_fuente=link, busqueda=busqueda, tag=t)
+			c.save()
+
+		for i in ids_selected_imgs:
+			url_img, link = links_imagenes[int(i)]
+			c = Contenido(tipo_contenido="imagen",info=url_img,dominio_fuente=link, busqueda=busqueda, tag=t)
+			c.save()
+
+
+		return HttpResponseRedirect("/buscador/ver-contenidos/")
+
+
 
 
 	context={'conected' : conected, 'u_name' : u_name, 'can_crud_contenidos' : can_crud_contenidos, "es_admin":es_admin}
 
 	return render(request, 'buscador/extraccion-contenidos.html',context)
+
+
+
+
+
+@login_required(login_url="/")
+def ver_contenidos(request):
+
+	# Verificacion de usuario
+	es_admin = 0
+	conected = 0
+	can_crud_contenidos = 0
+
+	if request.user.is_authenticated():
+		conected = 1
+
+		u = request.user
+		u_name = u.username
+
+		if u.has_perm("buscador.can_crud_contenidos"):
+			can_crud_contenidos = 1
+
+		if request.user.username == "ADMIN":
+			es_admin = 1
+
+		if request.GET.get('salir'):
+			return logout_view(request)
+
+
+	contenidos = Contenido.objects.filter(tipo_contenido="texto")
+	imagenes = Contenido.objects.filter(tipo_contenido="imagen")
+
+	range_contenidos = range(len(contenidos))
+	range_links_imagenes = range(len(imagenes))
+
+	tags = Tag.objects.all()
+
+
+
+	if request.method == "POST":
+
+		print "EN EL POST!"
+
+		cambio_tag = request.POST['cambio_tag']
+		print cambio_tag
+		t = Tag.objects.get(nombre_tag=cambio_tag)
+
+		ids_selected_contents = request.POST.getlist("contenidos_ver")
+		ids_selected_imgs = request.POST.getlist("imagenes_ver")
+
+		print ids_selected_contents
+		print ids_selected_imgs
+
+		for ide in ids_selected_contents:
+			cont = contenidos[int(ide)-1]
+			cont.tag = t
+			cont.save()
+
+		for ide in ids_selected_imgs:
+			image = imagenes[int(ide)-1]
+			image.tag = t
+			image.save()
+
+	context={"imagenes":imagenes,"contenidos":contenidos,'conected' : conected, 'u_name' : u_name,
+	 'can_crud_contenidos' : can_crud_contenidos, "es_admin":es_admin, "range_contenidos":range_contenidos,
+	 "range_links_imagenes":range_links_imagenes,"tags":tags}
+
+	return render(request, 'buscador/ver_contenidos.html',context)
+
+
 
 
 

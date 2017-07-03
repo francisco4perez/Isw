@@ -15,6 +15,16 @@ for inst_name in instituciones:
       inst = Institucion(nombre_institucion=inst_name)
       inst.save()
 
+print "Tags"
+
+tags = ["definicion","dibujo","historia","poema","caricatura","lluvia de ideas","pregunta clave","foto",
+"demostracion","juego","actividad","rompecabezas","examen","esquema","grafica",
+"linea temporal","ejemplo","sin tag"]
+
+for tag in tags:
+
+      t = Tag(nombre_tag=tag.upper())
+      t.save()
 
 print "Paginas de Confianza"
 

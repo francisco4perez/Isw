@@ -11,36 +11,34 @@
             {% csrf_token %}
             <div>
             
-                <h2>Extraccion de contenidos</h2>
+                <h2>Contenidos guardados en el sistema</h2>
 
-                <p class="instruction">Selecciona los contenidos a guardar en el sistema</p>
+                <p class="instruction">Los contenidos estan ordenados por la busqueda realizada</p>
 
                 <ul class="row center-xs middle-xs no-list">
                 
 
-                    {% if contenidos or imagenes %}
+                    {% if contenidos %}
 
-                    <form action="/buscador/extraccion-contenidos/" method="post" name="seleccion_form" id="seleccion_form">
+                    <form action="/buscador/ver-contenidos/" method="post" name="seleccion_form" id="seleccion_form">
                     {% csrf_token %}
                         
-                        <select class="contenidos" name="contenidos" multiple hidden>
+                        <select class="contenidos_ver" name="contenidos_ver" multiple hidden>
 
                         {% for i in range_contenidos %}    
-                            <option value="{{ i }}">{{ i }}</option>
+                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                         {% endfor %}
 
                         </select>
 
 
-                        <select class="imagenes" name="imagenes" multiple hidden>
+                        <select class="imagenes_ver" name="imagenes_ver" multiple hidden>
 
                         {% for j in range_links_imagenes %}    
-                            <option value="{{ j }}">{{ j }}</option>
+                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                         {% endfor %}
 
-                        </select>
-
-                    </form>
+                        </select>  
 
 
                         <div class="grid">
@@ -61,9 +59,13 @@
 
                             {% for contenido in contenidos %}
 
-                                <div id="{{ contenido.index }}" class="grid-item con-sombrita cont">
-                                    {{ contenido.text|linebreaksbr }}
+                                <div id="{{ forloop.counter }}" class="grid-item-ver con-sombrita cont">
+                                    {{ contenido.info|linebreaksbr }}
+                                    <div class="tag">
+                                        <div>{{ contenido.tag.nombre_tag }}</div>
+                                    </div>
                                 </div>
+
 
                             {% endfor %}
 
@@ -83,11 +85,15 @@
 
                             <div class="row div-imagenes">
                                 
-                            {% for link in links_imagenes %}
+                            {% for link in imagenes %}
 
-                                <div id="{{ link.index }}" class="grid-item con-sombrita img">
-                                    <img class="imagen" src="{{ link.text }}">
+                                <div id="{{ forloop.counter }}" class="grid-item-ver con-sombrita img">
+                                    <img class="imagen" src="{{ link.info }}">
+                                    <div class="tag">
+                                        <div class="text">{{ link.tag.nombre_tag }}</div>
+                                    </div>
                                 </div>
+  
 
                             {% endfor %}
 
@@ -95,12 +101,40 @@
                             
                             <br>
 
-                            <div class="col-md-3 col-md-offset-9">
+                            <div class="col-md-5 col-md-offset-7">
+                                    <div class="row" id="input-tags" style="margin-top: 30px; display: none">
+                                            <p style="margin-top: 9px">Añadir Tag</p>
+                                            <div class="col-md-5">
+                                            
+                                                <select class="form-control padding-bottom-0" name="cambio_tag" required>
+
+                                                {% if tags %}
+
+                                                  {% for tag in tags %}
+
+                                                    <option>{{tag.nombre_tag}}</option>
+
+                                                  {% endfor %}
+
+                                                {% endif %}
+
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                            <input class="submit btn be-orange" type="submit" value="Añadir"/>
+                                            </div>
+                                        </div>
+                                        <!--
                                 <button type="submit" id="btn_save_contenidos" class="btn btn-warning btn-lg" style="display: none;">Guardar Contenidos</button>
+                                -->
                             </div>
 
 
                         </div>
+
+                    </form>
+
+
 
                     {% else %}
 

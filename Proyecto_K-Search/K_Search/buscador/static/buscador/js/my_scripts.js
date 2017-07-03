@@ -2,6 +2,8 @@ $(document).ready(function(){
 
     var select1 = $(".contenidos");
     var select2 = $(".imagenes");
+    var select3 = $(".contenidos_ver");
+    var select4 = $(".imagenes_ver");
     var seccion_image1 = $("#seccion-option1");
     var seccion_image2 = $("#seccion-option2");
     var urls_form = document.urls_a_extraer;
@@ -66,6 +68,35 @@ $(document).ready(function(){
 	});
 
 
+	$('.grid-item-ver').on("click",function(){
+
+		var div_id = (parseInt($(this).attr("id"))).toString();
+		var clase = $(this).attr("class");
+		var opt;
+
+		if(clase == "grid-item-ver con-sombrita cont"){
+			opt = select3.find('option[value="'+ div_id +'"]');
+		}
+		else{
+			opt = select4.find('option[value="'+ div_id +'"]');
+		}
+
+		if (opt.prop("selected")){
+				opt.prop("selected",false)
+            	.end()
+            		.trigger("change");
+            	$(this).css({"border": "2px solid #333", "transition": "border 0.2s linear"});
+		}
+		else{
+			opt.prop("selected",true)
+            	.end()
+            		.trigger("change");
+            $(this).css({"border": "4px solid blue", "transition": "border 0.2s linear"});
+		}
+
+	});
+
+
 	$(".seccion-extraccion-contenidos").on("click",function(){
 
 		$(".div-contenidos").fadeToggle();
@@ -102,6 +133,72 @@ $(document).ready(function(){
 
 	});
 
+	var change_select = false;
+
+
+	$(".contenidos,.imagenes").on("change", function(ev, data){
+
+		var num_selecciones1 = select1.val().length;
+		var num_selecciones2 = select2.val().length;
+
+		if (num_selecciones1 == 0 && num_selecciones2 == 0){
+
+			change_select = false;
+			$("#btn_save_contenidos").hide();
+		}
+		else{
+			if(!change_select){
+				change_select = true;
+				$("#btn_save_contenidos").show();
+			}
+		}
+
+    });
+
+
+
+	$(".contenidos_ver,.imagenes_ver").on("change", function(ev, data){
+
+		var num_selecciones1 = select3.val().length;
+		var num_selecciones2 = select4.val().length;
+
+		if (num_selecciones1 == 0 && num_selecciones2 == 0){
+
+			change_select = false;
+			$("#btn_save_contenidos").hide();
+			$("#input-tags").hide();
+		}
+		else{
+			if(!change_select){
+				change_select = true;
+				$("#btn_save_contenidos").show();
+				$("#input-tags").show();
+				// Aparecer boton añadir tag, editar y eliminar
+			}
+		}
+
+    });
+
+
+
+
+    $("#btn_save_contenidos").on("click",function(){
+
+		var num_selecciones1 = select1.val().length;
+		var num_selecciones2 = select2.val().length;
+
+		if (num_selecciones1 == 0 && num_selecciones2 == 0){
+			alert("Selecciona al menos un contenido para guardar!");
+		}
+	    else{
+	    	$(this).prop("disabled", true);
+			$("#seleccion_form").submit();
+	    }
+	});
+
+
+
+
 	$(".delete").on("click",function(){
 
 		var dominio = $(this).attr("id");
@@ -134,8 +231,6 @@ $(document).ready(function(){
     });
 
    	
-
-
     //$(".rate2").on("change", function(ev, data){
     //    console.log(data.from, data.to);
     //});

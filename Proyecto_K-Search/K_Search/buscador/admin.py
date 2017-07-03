@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Institucion)
 admin.site.register(Area)
 admin.site.register(PaginaDeConfianza)
+admin.site.register(Tag)

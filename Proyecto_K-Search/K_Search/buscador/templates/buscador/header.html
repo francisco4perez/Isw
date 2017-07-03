@@ -22,13 +22,14 @@
     <nav class="be-green large-padding">
         <ul class="no-list row center-xs middle-xs">
             <li class="col-md col-xs"><h1 class="no-margin"><a href="/buscador/">K-Search</a></h1></li>
-            <li class="col-md col-xs">Ver contenidos</li>
 
             {% if conected %}
                 
                 {% if can_crud_contenidos %}
-                    <!--
-                    <li class="col-md col-xs"><a href="/registro/">Registrar usuario</a></li>-->
+
+                <li class="col-md col-xs">
+                        <a class="opcion-header" href="/buscador/ver-contenidos">Ver Contenidos</a>
+                </li>
                     
                     <div class="dropdown">
                       <button class="dropbtn">Opciones</button>
